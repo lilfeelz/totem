@@ -1,9 +1,7 @@
 name: zmk-build
 
-# The upstream reusable workflow (zmkfirmware/zmk build-user-config.yml) takes a config_path,
-# but expects build.yaml at the repo root and runs west from there. The config sits at the
-# root (config/, where the keymap editor looks) while build.yaml, boards and the zephyr
-# module stay in zmk/, so this is the same sequence with those paths.
+# Build in an isolated west workspace so upstream checkouts do not collide
+# with this repository, which also provides a Zephyr module.
 
 permissions:
   contents: read
@@ -13,16 +11,16 @@ on:
     branches: [main]
     paths:
       - config/**
-      - zmk/boards/**
-      - zmk/build.yaml
-      - zmk/zephyr/**
+      - boards/**
+      - build.yaml
+      - zephyr/**
       - .github/workflows/zmk-build.yml
   pull_request:
     paths:
       - config/**
-      - zmk/boards/**
-      - zmk/build.yaml
-      - zmk/zephyr/**
+      - boards/**
+      - build.yaml
+      - zephyr/**
       - .github/workflows/zmk-build.yml
   workflow_dispatch:
 
@@ -39,7 +37,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
       - id: fetch
-        run: echo "build_matrix=$(yq -oj -I0 zmk/build.yaml)" >> "$GITHUB_OUTPUT"
+        run: echo "build_matrix=$(yq -oj -I0 build.yaml)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: matrix
@@ -52,7 +50,7 @@ jobs:
     name: build (${{ matrix.shield }})
     env:
       # An isolated workspace, as upstream does when the config repo is also a zephyr
-      # module: west clones zmk and zephyr next to the config, and zmk/zephyr/module.yml
+      # module: west clones zmk and zephyr next to the config, and zephyr/module.yml
       # would collide with the zephyr checkout.
       base: /tmp/zmk-config
       board: ${{ matrix.board }}
@@ -76,7 +74,7 @@ jobs:
             /tmp/zmk-config/zephyr/
             /tmp/zmk-config/bootloader/
             /tmp/zmk-config/zmk/
-          key: ${{ runner.os }}-build-cache-zephyr-${{ env.zephyr_version }}-modules-${{ hashFiles('config/west.yml', 'zmk/build.yaml') }}
+          key: ${{ runner.os }}-build-cache-zephyr-${{ env.zephyr_version }}-modules-${{ hashFiles('config/west.yml', 'build.yaml') }}
           restore-keys: |
             ${{ runner.os }}-build-cache-zephyr-${{ env.zephyr_version }}-modules-
 
@@ -97,7 +95,7 @@ jobs:
         run: |
           west build -s zmk/app -d build -b "$board" -- \
             -DZMK_CONFIG="$base/config" -DSHIELD="$shield" \
-            -DZMK_EXTRA_MODULES="$GITHUB_WORKSPACE/zmk"
+            -DZMK_EXTRA_MODULES="$GITHUB_WORKSPACE"
 
       - name: collect firmware
         shell: bash

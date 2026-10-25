@@ -30,20 +30,20 @@ Firmware `.uf2` files land in `build/<side>/zephyr/zmk.uf2`. Flash by copying to
 
 ## CI Build
 
-`../.github/workflows/zmk-build.yml` (repo root) triggers on:
-- Push to `main` touching `config/**`, `zmk/boards/**`, `zmk/build.yaml`, `zmk/zephyr/**`
+`.github/workflows/zmk-build.yml` (repo root) triggers on:
+- Push to `main` touching `config/**`, `boards/**`, `build.yaml`, `zephyr/**`
 - PRs with same path filters
 - Manual trigger via `workflow_dispatch`
 
 Same steps as `zmkfirmware/zmk/.github/workflows/build-user-config.yml` (the official ZMK build
-action), with the config at the root and build.yaml, boards and the zephyr module in `zmk/`.
+action), with the config at the root and build.yaml, boards and the zephyr module at the root.
 
 ## CI Docs
 
-`../.github/workflows/zmk-docs.yml`:
+`.github/workflows/zmk-docs.yml`:
 - Generates `keymap.svg` via `keymap-drawer` with `keymap_drawer.config.yaml` for symbol rendering
 - Builds honkit documentation site from `docs/` directory
-- Deploys to GH Pages via `peaceiris/actions-gh-pages` (https://lilfeelz.github.io/keyboard/)
+- Deploys to GH Pages via `peaceiris/actions-gh-pages` (https://lilfeelz.github.io/totem/)
 
 ## West Manifest
 

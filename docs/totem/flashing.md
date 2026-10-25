@@ -9,7 +9,7 @@ west build -b xiao_ble//zmk -d build/right -s zmk/app -- -DSHIELD=totem_right
 
 ## GitHub Actions
 
-CI runs the ZMK build steps inside `zmk/`. Push to `main` to trigger a build. Firmware artifacts available under [Actions](https://github.com/lilfeelz/keyboard/actions/workflows/zmk-build.yml).
+CI runs the ZMK build steps in an isolated west workspace. Push to `main` to trigger a build. Firmware artifacts available under [Actions](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml).
 
 ## Flashing
 

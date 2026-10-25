@@ -1,5 +1,5 @@
 {
-  "title": "lilfeelz keyboard",
+  "title": "lilfeelz TOTEM",
   "plugins": ["-fontsettings", "-sharing"],
   "styles": { "website": "dark.css" }
 }

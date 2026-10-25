@@ -1,16 +1,16 @@
 name: zmk-docs
 
-# Keymap SVG (keymap-drawer) plus the HonKit site under zmk/docs (org theme via docs/dark.css), published to the
-# gh-pages branch: https://lilfeelz.github.io/keyboard/
+# Keymap SVG (keymap-drawer) plus the HonKit site under docs/ (org theme via docs/dark.css), published to the
+# gh-pages branch: https://lilfeelz.github.io/totem/
 
 on:
   push:
     branches: [main]
     paths:
-      - zmk/docs/**
-      - zmk/docs/book.json
-      - zmk/package.json
-      - zmk/keymap_drawer.config.yaml
+      - docs/**
+      - docs/book.json
+      - package.json
+      - keymap_drawer.config.yaml
       - config/totem.keymap
       - .github/workflows/zmk-docs.yml
   workflow_dispatch:
@@ -26,9 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    defaults:
-      run:
-        working-directory: zmk
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
@@ -40,7 +37,7 @@ jobs:
         run: |
           pip install keymap-drawer==0.23.0
           mkdir -p docs/totem/images
-          keymap -c keymap_drawer.config.yaml parse -z ../config/totem.keymap -o /tmp/keymap.yaml
+          keymap -c keymap_drawer.config.yaml parse -z config/totem.keymap -o /tmp/keymap.yaml
           keymap -c keymap_drawer.config.yaml draw /tmp/keymap.yaml -o docs/totem/images/keymap.svg
 
       - run: npx --yes honkit@6.2.2 build ./docs "$PWD/site" # HonKit resolves a relative output path against the book root
@@ -48,7 +45,7 @@ jobs:
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: site
-          path: zmk/site
+          path: site
           if-no-files-found: error
 
   # Only this job may push: the installs above pull unpinned transitive dependencies.

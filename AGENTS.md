@@ -11,7 +11,7 @@ the `&mt {};` block, custom behaviors in `/behaviors {};`.
 ## Structure
 
 ```
-../config/                  # at the repo root: the keymap editor only reads config/ there
+config/                  # at the repo root: the keymap editor only reads config/ there
   totem.keymap              # Root keymap — THIS IS THE SOURCE OF TRUTH
   totem.conf                # Board-level config (sleep, idle, BT)
   west.yml                  # West manifest (ZMK revision, pinned to a main commit)
@@ -57,7 +57,7 @@ home rows of BASE (position 19), NAV and SYM, plus `lt_caps` and `sk_mo` on BASE
 
 ```sh
 python3 -m venv /tmp/kv && /tmp/kv/bin/pip install keymap-drawer
-/tmp/kv/bin/keymap parse -z ../config/totem.keymap -o /tmp/keymap.yaml
+/tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
 /tmp/kv/bin/keymap draw /tmp/keymap.yaml -o /tmp/keymap.svg
 ```
 
@@ -68,7 +68,7 @@ west build -b xiao_ble//zmk -d build/left -s zmk/app -- -DSHIELD=totem_left
 west build -b xiao_ble//zmk -d build/right -s zmk/app -- -DSHIELD=totem_right
 ```
 
-CI builds via `../.github/workflows/zmk-build.yml`. Parse without errors means the
+CI builds via `.github/workflows/zmk-build.yml`. Parse without errors means the
 keymap is valid.
 
 ## Docs preview
@@ -79,11 +79,11 @@ npx honkit serve docs     # http://localhost:4000
 ```
 
 Docs deploy on push to `main` touching `docs/**` or `book.json`
-(`../.github/workflows/zmk-docs.yml`). The keymap SVG is generated in CI by
+(`.github/workflows/zmk-docs.yml`). The keymap SVG is generated in CI by
 keymap-drawer. To regenerate it locally into the docs tree:
 
 ```sh
-/tmp/kv/bin/keymap parse -z ../config/totem.keymap -o /tmp/keymap.yaml
+/tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
 /tmp/kv/bin/keymap draw /tmp/keymap.yaml -o docs/totem/images/keymap.svg
 ```
 
@@ -91,3 +91,9 @@ keymap-drawer. To regenerate it locally into the docs tree:
 
 - Empty `totem.conf` in shield dir
 - `boards/shields/.gitkeep` is confusing/wrong
+
+## Layout counterparts
+
+Apply layout changes here and in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd`
+and `lilfeelz/workspaces/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
+or explain any copies left behind. No release-please or changelog bumps.

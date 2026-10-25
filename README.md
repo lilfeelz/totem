@@ -1,6 +1,6 @@
-[![Build](https://github.com/lilfeelz/keyboard/actions/workflows/zmk-build.yml/badge.svg)](https://github.com/lilfeelz/keyboard/actions/workflows/zmk-build.yml)
-[![Docs](https://github.com/lilfeelz/keyboard/actions/workflows/zmk-docs.yml/badge.svg)](https://lilfeelz.github.io/keyboard/)
-[![GH Pages](https://img.shields.io/badge/docs-lilfeelz.github.io/keyboard-9ee7ff?logo=github&labelColor=0b0d10)](https://lilfeelz.github.io/keyboard/)
+[![Build](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml/badge.svg)](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml)
+[![Docs](https://github.com/lilfeelz/totem/actions/workflows/zmk-docs.yml/badge.svg)](https://lilfeelz.github.io/totem/)
+[![GH Pages](https://img.shields.io/badge/docs-lilfeelz.github.io/totem-9ee7ff?logo=github&labelColor=0b0d10)](https://lilfeelz.github.io/totem/)
 
 # TOTEM ZMK Configuration
 
@@ -12,7 +12,7 @@
 
 ```sh
 # Edit root keymap (this overrides shield built-in)
-$EDITOR ../config/totem.keymap
+$EDITOR config/totem.keymap
 ```
 
 ### Validate
@@ -20,7 +20,7 @@ $EDITOR ../config/totem.keymap
 ```sh
 python3 -m venv /tmp/kv
 /tmp/kv/bin/pip install keymap-drawer
-/tmp/kv/bin/keymap parse -z ../config/totem.keymap -o /tmp/keymap.yaml
+/tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
 /tmp/kv/bin/keymap draw /tmp/keymap.yaml -o /tmp/keymap.svg
 # No errors = valid
 ```
@@ -48,7 +48,7 @@ npx honkit serve docs
 
 Numbers are ZMK key positions, the flat indices used by `key-positions` and
 `hold-trigger-key-positions`. The transform lives in
-[`config/boards/shields/totem/totem.dtsi`](../config/boards/shields/totem/totem.dtsi).
+[`config/boards/shields/totem/totem.dtsi`](config/boards/shields/totem/totem.dtsi).
 
 ```
      ┌────┬────┬────┬────┬────┐   ┌────┬────┬────┬────┬────┐
@@ -71,7 +71,7 @@ with 19 of its 20 positions used.
 
 Four layers (BASE, NAV, SYM, FUN). The layer table, thumb bindings and combos live in one place:
 [`docs/totem/keymap.md`](docs/totem/keymap.md) (published at
-[lilfeelz.github.io/keyboard](https://lilfeelz.github.io/keyboard/totem/keymap.html)).
+[lilfeelz.github.io/totem](https://lilfeelz.github.io/totem/totem/keymap.html)).
 
 ## Key Features
 
@@ -91,9 +91,9 @@ Four layers (BASE, NAV, SYM, FUN). The layer table, thumb bindings and combos li
 
 ## CI/CD
 
-Workflows live at the repo root (`../.github/workflows/`):
+Workflows live at the repo root (`.github/workflows/`):
 
-- **zmk-build.yml**: Builds firmware on push/PR touching `config/**` or `zmk/boards/**`
+- **zmk-build.yml**: Builds firmware on push/PR touching `config/**` or `boards/**`
 - **zmk-docs.yml**: Generates keymap SVG + honkit docs site, deploys to GH Pages
 
 ## Structure
@@ -104,7 +104,7 @@ config/                       # repo root, where the keymap editor looks
 ├── totem.conf                # Board config (sleep, BT, idle)
 ├── west.yml                  # West manifest (ZMK pinned to a main commit)
 └── boards/shields/totem/     # Shield definition (dtsi, overlay, Kconfig)
-zmk/
+./
 ├── build.yaml                # Build matrix
 ├── docs/                     # Honkit documentation site
 ├── keymap_drawer.config.yaml # SVG rendering config
@@ -115,3 +115,9 @@ zmk/
 
 - Empty `totem.conf` in shield dir
 - `boards/shields/.gitkeep` confusing/wrong location
+
+Layout counterparts live in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd` and
+[lilfeelz/workspaces/kanata-ios](https://github.com/lilfeelz/workspaces/tree/main/kanata-ios).
+Keep layer, thumb, hold and chord changes in step across all three layouts.
+
+Firmware history was extracted from `lilfeelz/keyboard`; kanata-ios moved to workspaces.
