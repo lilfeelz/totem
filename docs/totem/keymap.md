@@ -30,7 +30,7 @@ Thumbs, left to right: 32 left outer, 33 left middle, 34 left inner,
 
 | # | Node | Name | How to reach | Contents |
 |---|------|------|--------------|----------|
-| 0 | `base` | BASE | default | QWERTY alphas; `/` on 19 (hold: Ctrl+Alt+Cmd); `-` on 30; hold FUN, tap caps word on 20 and 31 |
+| 0 | `base` | BASE | default | QWERTY alphas; `/` on 19 (hold: Ctrl+Alt+Cmd); `-` on 30; hold FUN, tap Caps Lock on 20 and 31 |
 | 1 | `left` | NAV | hold left middle thumb (33) | Numbers, arrows, Home/PgDn/PgUp/End, Cmd+letter shortcuts, `cmd_tab`/`cmd_stb` |
 | 2 | `right` | SYM | hold right middle thumb (36) | Shifted symbols, braces and brackets, pipe, angle brackets, parens, `?`; Cmd+letter on the bottom right |
 | 3 | `fun` | FUN | hold either outer pinky (20 or 31) | F1 to F12, brightness, volume, mute, output toggle, BT select 0 to 3 (mirrored), BT clear |
@@ -56,8 +56,8 @@ FUN in detail:
 
 Bindings behind the BASE thumbs:
 
-- 32, 37: `&sk LEFT_SHIFT`, `&sk RIGHT_SHIFT`.
-- 20, 31 (outer pinkies): `&lt_caps 3 0`. Hold is `&lt 3`, tap is `&caps` (caps word; with Shift held, Caps Lock).
+- 32, 37: `&sk LEFT_SHIFT`, `&sk RIGHT_SHIFT`. Pressed together: `caps_word` combo, see below.
+- 20, 31 (outer pinkies): `&lt FUN CAPSLOCK`. Stock `&lt`: hold FUN, tap Caps Lock.
 - 33: `&sk_mo 1 BACKSPACE`. Hold is `&mo 1`, tap is `&sk BACKSPACE`.
 - 36: `&lt 2 ESCAPE`.
 
@@ -69,6 +69,7 @@ Cells marked "(held)" or inherited from BASE are `&trans` in the keymap.
 |------|-----------|-----------|-------|--------|
 | `enter` | 16 17 | J K | BASE | Enter |
 | `bs_df` | 12 13 | D F | BASE | `&bwd_dwd`: Alt+Backspace, with Shift Alt+Delete |
+| `caps_word` | 32 37 | L outer thumb, R outer thumb | BASE | `&caps`: caps word, with Shift held Caps Lock |
 
 ## Macros
 
