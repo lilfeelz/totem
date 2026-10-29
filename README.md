@@ -27,12 +27,19 @@ python3 -m venv /tmp/kv
 
 ### Build
 
-Requires ZMK SDK (`west`). CI builds on push.
+CI builds on push. Locally, one-time setup:
 
 ```sh
-west build -b xiao_ble//zmk -d build/left -s zmk/app -- -DSHIELD=totem_left
-west build -b xiao_ble//zmk -d build/right -s zmk/app -- -DSHIELD=totem_right
+brew install cmake ninja dtc gperf ccache
+uv tool install west
+# Zephyr SDK 0.17.0 (arm-zephyr-eabi) from github.com/zephyrproject-rtos/sdk-ng/releases
+# extracted to ~/zephyr-sdk-0.17.0 (west sdk install does not work with CMake 4)
+make update
+uv tool install west --force --with-requirements ~/.cache/zmk-totem/zephyr/scripts/requirements-base.txt
 ```
+
+Then `make` writes `build/{totem_left,totem_right,settings_reset}.uf2`; `make totem_left` builds one.
+The workspace lives in `~/.cache/zmk-totem`, outside the repo, because this repo is itself a Zephyr module.
 
 ### Docs preview
 
@@ -117,7 +124,7 @@ config/                       # repo root, where the keymap editor looks
 - `boards/shields/.gitkeep` confusing/wrong location
 
 Layout counterparts live in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd` and
-[lilfeelz/workspaces/kanata-ios](https://github.com/lilfeelz/workspaces/tree/main/kanata-ios).
+[JakobMelchard/apple](https://github.com/JakobMelchard/apple/tree/main/kanata-ios) `kanata-ios/`.
 Keep layer, thumb, hold and chord changes in step across all three layouts.
 
-Firmware history was extracted from `lilfeelz/keyboard`; kanata-ios moved to workspaces.
+Firmware history was extracted from `lilfeelz/keyboard`, since deleted; kanata-ios lives in `JakobMelchard/apple`.

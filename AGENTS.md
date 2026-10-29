@@ -64,9 +64,13 @@ python3 -m venv /tmp/kv && /tmp/kv/bin/pip install keymap-drawer
 ## Build (needs ZMK SDK)
 
 ```sh
-west build -b xiao_ble//zmk -d build/left -s zmk/app -- -DSHIELD=totem_left
-west build -b xiao_ble//zmk -d build/right -s zmk/app -- -DSHIELD=totem_right
+make              # build/{totem_left,totem_right,settings_reset}.uf2
+make totem_left   # one shield
+make update       # re-sync config, fetch ZMK at the pinned west.yml revision
 ```
+
+The Makefile builds in an isolated west workspace at `~/.cache/zmk-totem` (as CI does) with the
+Zephyr SDK 0.17.0 at `~/zephyr-sdk-0.17.0`. Setup: README "Build".
 
 CI builds via `.github/workflows/zmk-build.yml`. Parse without errors means the
 keymap is valid.
@@ -95,5 +99,5 @@ keymap-drawer. To regenerate it locally into the docs tree:
 ## Layout counterparts
 
 Apply layout changes here and in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd`
-and `lilfeelz/workspaces/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
+and `JakobMelchard/apple/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
 or explain any copies left behind. No release-please or changelog bumps.
