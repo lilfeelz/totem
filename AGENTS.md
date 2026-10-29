@@ -33,16 +33,16 @@ repeat the table here.
 
 ### Hold-taps
 
-The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block) on the
-home rows of BASE (position 19), NAV and SYM, plus stock `&lt` (outer pinkies, hold FUN
-tap Caps Lock) and `sk_mo` on BASE.
+The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block) and
+stock `&lt` (tapping-term 150ms, set in the `&lt {};` block) on the home rows of BASE
+(position 19), NAV and SYM, the outer pinkies (hold FUN, tap Caps Lock) and the left
+middle thumb (hold NAV, tap Backspace).
 `mt_left` and `mt_right` are defined but not bound anywhere; kept for now, see #37.
 
 - `mt_left` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
   - Trigger positions (22): right hand 5-9, 15-19, 26-31 and all six thumbs 32-37
 - `mt_right` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
   - Trigger positions (22): left hand 0-4, 10-14, 20-25 and all six thumbs 32-37
-- `sk_mo` (150ms tap): `&mo` on hold, `&sk` on tap
 
 ### Mod-morphs (6)
 

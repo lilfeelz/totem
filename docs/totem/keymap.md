@@ -58,7 +58,7 @@ Bindings behind the BASE thumbs:
 
 - 32, 37: `&sk LEFT_SHIFT`, `&sk RIGHT_SHIFT`. Pressed together: `caps_word` combo, see below.
 - 20, 31 (outer pinkies): `&lt FUN CAPSLOCK`. Stock `&lt`: hold FUN, tap Caps Lock.
-- 33: `&sk_mo 1 BACKSPACE`. Hold is `&mo 1`, tap is `&sk BACKSPACE`.
+- 33: `&lt 1 BACKSPACE`. Stock `&lt`: hold NAV, tap Backspace.
 - 36: `&lt 2 ESCAPE`.
 
 Cells marked "(held)" or inherited from BASE are `&trans` in the keymap.
