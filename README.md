@@ -120,6 +120,7 @@ config/                       # repo root, where the keymap editor looks
 
 ## Known Issues
 
+- BT_SEL profile switch can hang; flash `totem_left_debug` to read the USB log
 - Empty `totem.conf` in shield dir
 - `boards/shields/.gitkeep` confusing/wrong location
 

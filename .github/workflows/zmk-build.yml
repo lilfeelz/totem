@@ -47,7 +47,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.matrix.outputs.build_matrix) }}
-    name: build (${{ matrix.shield }})
+    name: build (${{ matrix.artifact-name || matrix.shield }})
     env:
       # An isolated workspace, as upstream does when the config repo is also a zephyr
       # module: west clones zmk and zephyr next to the config, and zephyr/module.yml
@@ -55,6 +55,8 @@ jobs:
       base: /tmp/zmk-config
       board: ${{ matrix.board }}
       shield: ${{ matrix.shield }}
+      snippet: ${{ matrix.snippet }}
+      artifact: ${{ matrix.artifact-name }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
@@ -93,7 +95,7 @@ jobs:
       - name: west build
         working-directory: ${{ env.base }}
         run: |
-          west build -s zmk/app -d build -b "$board" -- \
+          west build -s zmk/app -d build -b "$board" ${snippet:+-S "$snippet"} -- \
             -DZMK_CONFIG="$base/config" -DSHIELD="$shield" \
             -DZMK_EXTRA_MODULES="$GITHUB_WORKSPACE"
 
@@ -101,7 +103,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p artifacts
-          name="${shield}-${board//\//_}-zmk"
+          name="${artifact:-$shield}-${board//\//_}-zmk"
           echo "artifact_name=$name" >> "$GITHUB_ENV"
           cp "$base/build/zephyr/zmk.uf2" "artifacts/$name.uf2"
 
