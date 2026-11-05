@@ -33,24 +33,24 @@ repeat the table here.
 
 ### Hold-taps
 
-The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block) on the
-home rows of BASE (position 19), NAV and SYM, plus `lt_caps` and `sk_mo` on BASE.
+The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block) and
+stock `&lt` (tapping-term 150ms, set in the `&lt {};` block) on the home rows of BASE
+(position 19), NAV and SYM, the outer pinkies (hold FUN, tap Caps Lock) and the left
+middle thumb (hold NAV, tap Backspace).
 `mt_left` and `mt_right` are defined but not bound anywhere; kept for now, see #37.
 
 - `mt_left` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
   - Trigger positions (22): right hand 5-9, 15-19, 26-31 and all six thumbs 32-37
 - `mt_right` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
   - Trigger positions (22): left hand 0-4, 10-14, 20-25 and all six thumbs 32-37
-- `lt_caps` (150ms tap): `&lt` on hold, caps-word on tap
-- `sk_mo` (150ms tap): `&mo` on hold, `&sk` on tap
 
 ### Mod-morphs (6)
 
 `comma_semicolon`, `period_colon`, `cmd_tab` (TAB→F21 with GUI), `cmd_stb` (LS(TAB)→F22 with GUI), `bwd_dwd`, `caps` (caps_word→CAPSLOCK with shift).
 
-### Combos (2)
+### Combos (3)
 
-`enter` (16 17) and `bs_df` (12 13), both BASE only. See
+`enter` (16 17), `bs_df` (12 13), `caps_word` (32 37, outer thumbs), all BASE only. See
 `docs/totem/keymap.md#combos`.
 
 ## Validate
@@ -64,9 +64,13 @@ python3 -m venv /tmp/kv && /tmp/kv/bin/pip install keymap-drawer
 ## Build (needs ZMK SDK)
 
 ```sh
-west build -b xiao_ble//zmk -d build/left -s zmk/app -- -DSHIELD=totem_left
-west build -b xiao_ble//zmk -d build/right -s zmk/app -- -DSHIELD=totem_right
+make              # build/{totem_left,totem_right,settings_reset}.uf2
+make totem_left   # one shield
+make update       # re-sync config, fetch ZMK at the pinned west.yml revision
 ```
+
+The Makefile builds in an isolated west workspace at `~/.cache/zmk-totem` (as CI does) with the
+Zephyr SDK 0.17.0 at `~/zephyr-sdk-0.17.0`. Setup: README "Build".
 
 CI builds via `.github/workflows/zmk-build.yml`. Parse without errors means the
 keymap is valid.
@@ -95,5 +99,5 @@ keymap-drawer. To regenerate it locally into the docs tree:
 ## Layout counterparts
 
 Apply layout changes here and in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd`
-and `lilfeelz/workspaces/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
+and `JakobMelchard/apple/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
 or explain any copies left behind. No release-please or changelog bumps.

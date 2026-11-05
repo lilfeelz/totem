@@ -2,3 +2,4 @@ docs/totem/images/keymap.svg
 
 # local run logs
 .log
+build/
