@@ -120,6 +120,7 @@ config/                       # repo root, where the keymap editor looks
 
 ## Known Issues
 
+- BT_SEL profile switch can hang; to read the USB log, flash the UF2 from the `totem_left_debug-xiao_ble__zmk-zmk` artifact of the latest [zmk-build](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml) run
 - Empty `totem.conf` in shield dir
 - `boards/shields/.gitkeep` confusing/wrong location
 
