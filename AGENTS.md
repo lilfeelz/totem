@@ -37,7 +37,7 @@ The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block)
 stock `&lt` (tapping-term 150ms, set in the `&lt {};` block) on the home rows of BASE
 (position 19), NAV and SYM, the outer pinkies (hold FUN, tap Caps Lock) and the left
 middle thumb (hold NAV, tap Backspace).
-`mt_left` and `mt_right` are defined but not bound anywhere; kept for now, see #37.
+`mt_left` and `mt_right` are defined but not bound anywhere; kept for now, bind or delete is an open decision with no tracking issue yet.
 
 - `mt_left` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
   - Trigger positions (22): right hand 5-9, 15-19, 26-31 and all six thumbs 32-37
@@ -90,11 +90,6 @@ keymap-drawer. To regenerate it locally into the docs tree:
 /tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
 /tmp/kv/bin/keymap draw /tmp/keymap.yaml -o docs/totem/images/keymap.svg
 ```
-
-## Known Issues
-
-- Empty `totem.conf` in shield dir
-- `boards/shields/.gitkeep` is confusing/wrong
 
 ## Layout counterparts
 
