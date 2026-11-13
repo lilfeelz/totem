@@ -82,7 +82,7 @@ Four layers (BASE, NAV, SYM, FUN). The layer table, thumb bindings and combos li
 
 ## Key Features
 
-- **Hold-taps**: stock `&mt` (150ms) on the home rows: `/` on BASE (hold Ctrl+Alt+Cmd), Cmd+A/S/D/F on NAV and `` ` `` `"` `'` `~` on SYM, each holding Cmd, Ctrl, Alt or Globe; stock `&lt` on the outer pinkies (hold FUN, tap Caps Lock) and on the left middle thumb (hold NAV, tap Backspace). Caps word is a combo on the two outer thumbs (32, 37). The positional `mt_left`/`mt_right` hold-taps (250ms, balanced, hold-trigger-on-release) are defined but bound nowhere, kept for now (#37)
+- **Hold-taps**: stock `&mt` (150ms) on the home rows: `/` on BASE (hold Ctrl+Alt+Cmd), Cmd+A/S/D/F on NAV and `` ` `` `"` `'` `~` on SYM, each holding Cmd, Ctrl, Alt or Globe; stock `&lt` on the outer pinkies (hold FUN, tap Caps Lock) and on the left middle thumb (hold NAV, tap Backspace). Caps word is a combo on the two outer thumbs (32, 37). The positional `mt_left`/`mt_right` hold-taps (250ms, balanced, hold-trigger-on-release) are defined but bound nowhere, kept for now, bind or delete is an open decision (no tracking issue yet)
 - **Caps word**: `&caps_word` with continuation list (underscore, backspace, delete, arrows, etc.)
 - **3 combos**: see [`docs/totem/keymap.md`](docs/totem/keymap.md#combos)
 - **6 mod-morphs**: comma↔semicolon, period↔colon, cmd+tab↔F21, cmd+shift+tab↔F22, alt+backspace↔alt+delete, caps-word↔caps-lock
@@ -100,7 +100,7 @@ Four layers (BASE, NAV, SYM, FUN). The layer table, thumb bindings and combos li
 
 Workflows live at the repo root (`.github/workflows/`):
 
-- **zmk-build.yml**: Builds firmware on push/PR touching `config/**` or `boards/**`
+- **zmk-build.yml**: Builds firmware on push/PR touching `config/**`, `build.yaml` or `zephyr/**`
 - **zmk-docs.yml**: Generates keymap SVG + honkit docs site, deploys to GH Pages
 
 ## Structure
@@ -121,8 +121,6 @@ config/                       # repo root, where the keymap editor looks
 ## Known Issues
 
 - BT_SEL profile switch can hang; to read the USB log, flash the UF2 from the `totem_left_debug-xiao_ble__zmk-zmk` artifact of the latest [zmk-build](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml) run
-- Empty `totem.conf` in shield dir
-- `boards/shields/.gitkeep` confusing/wrong location
 
 Layout counterparts live in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd` and
 [JakobMelchard/apple](https://github.com/JakobMelchard/apple/tree/main/kanata-ios) `kanata-ios/`.

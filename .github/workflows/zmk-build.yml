@@ -11,14 +11,12 @@ on:
     branches: [main]
     paths:
       - config/**
-      - boards/**
       - build.yaml
       - zephyr/**
       - .github/workflows/zmk-build.yml
   pull_request:
     paths:
       - config/**
-      - boards/**
       - build.yaml
       - zephyr/**
       - .github/workflows/zmk-build.yml
