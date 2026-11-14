@@ -37,12 +37,6 @@ The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block)
 stock `&lt` (tapping-term 150ms, set in the `&lt {};` block) on the home rows of BASE
 (position 19), NAV and SYM, the outer pinkies (hold FUN, tap Caps Lock) and the left
 middle thumb (hold NAV, tap Backspace).
-`mt_left` and `mt_right` are defined but not bound anywhere; kept for now, bind or delete is an open decision with no tracking issue yet.
-
-- `mt_left` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
-  - Trigger positions (22): right hand 5-9, 15-19, 26-31 and all six thumbs 32-37
-- `mt_right` (balanced, 250ms, hold-trigger-on-release, require-prior-idle=100)
-  - Trigger positions (22): left hand 0-4, 10-14, 20-25 and all six thumbs 32-37
 
 ### Mod-morphs (6)
 
