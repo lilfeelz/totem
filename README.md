@@ -82,7 +82,7 @@ Four layers (BASE, NAV, SYM, FUN). The layer table, thumb bindings and combos li
 
 ## Key Features
 
-- **Hold-taps**: stock `&mt` (150ms) on the home rows: `/` on BASE (hold Ctrl+Alt+Cmd), Cmd+A/S/D/F on NAV and `` ` `` `"` `'` `~` on SYM, each holding Cmd, Ctrl, Alt or Globe; stock `&lt` on the outer pinkies (hold FUN, tap Caps Lock) and on the left middle thumb (hold NAV, tap Backspace). Caps word is a combo on the two outer thumbs (32, 37). The positional `mt_left`/`mt_right` hold-taps (250ms, balanced, hold-trigger-on-release) are defined but bound nowhere, kept for now, bind or delete is an open decision (no tracking issue yet)
+- **Hold-taps**: stock `&mt` (150ms) on the home rows: `/` on BASE (hold Ctrl+Alt+Cmd), Cmd+A/S/D/F on NAV and `` ` `` `"` `'` `~` on SYM, each holding Cmd, Ctrl, Alt or Globe; stock `&lt` on the outer pinkies (hold FUN, tap Caps Lock) and on the left middle thumb (hold NAV, tap Backspace). Caps word is a combo on the two outer thumbs (32, 37).
 - **Caps word**: `&caps_word` with continuation list (underscore, backspace, delete, arrows, etc.)
 - **3 combos**: see [`docs/totem/keymap.md`](docs/totem/keymap.md#combos)
 - **6 mod-morphs**: comma↔semicolon, period↔colon, cmd+tab↔F21, cmd+shift+tab↔F22, alt+backspace↔alt+delete, caps-word↔caps-lock
