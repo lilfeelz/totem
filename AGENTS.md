@@ -11,11 +11,11 @@ the `&mt {};` block, custom behaviors in `/behaviors {};`.
 ## Structure
 
 ```
-config/                  # at the repo root: the keymap editor only reads config/ there
+config/                     # ZMK user configuration
   totem.keymap              # Root keymap — THIS IS THE SOURCE OF TRUTH
   totem.conf                # Board-level config (sleep, idle, BT)
   west.yml                  # West manifest (ZMK revision, pinned to a main commit)
-  info.json                 # Keymap editor layout (keymap-drawer TOTEM geometry, row/col = transform)
+  info.json                 # Layout metadata (keymap-drawer TOTEM geometry, row/col = transform)
   boards/shields/totem/     # Shield definitions (dtsi, overlay, Kconfig)
     totem_left.overlay      # Left half column GPIOs
     totem_right.overlay     # Right half (col-offset=5) + column GPIOs

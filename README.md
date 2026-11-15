@@ -106,7 +106,7 @@ Workflows live at the repo root (`.github/workflows/`):
 ## Structure
 
 ```
-config/                       # repo root, where the keymap editor looks
+config/                      # ZMK user configuration
 ├── totem.keymap              # Root keymap (primary, overrides shield)
 ├── totem.conf                # Board config (sleep, BT, idle)
 ├── west.yml                  # West manifest (ZMK pinned to a main commit)
