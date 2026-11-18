@@ -1,5 +1,5 @@
 # Local firmware build in an isolated west workspace, as CI does (zmk-build.yml).
-# One-time setup: README "Local build".
+# One-time setup: README "Build".
 W ?= $(HOME)/.cache/zmk-totem
 export ZEPHYR_SDK_INSTALL_DIR ?= $(HOME)/zephyr-sdk-0.17.0
 export ZEPHYR_TOOLCHAIN_VARIANT = zephyr
