@@ -1,92 +1,47 @@
-# ZMK — TOTEM Firmware
+# ZMK: TOTEM Firmware
 
-ZMK user config for TOTEM 38-key split keyboard. Seeed XIAO BLE (nRF52840).
+ZMK user config for TOTEM 38-key split keyboard on Seeed XIAO BLE (nRF52840).
 
 Edit `config/totem.keymap`; the root keymap overrides the shield built-in.
-Matrix: 38 keys. Rows 0-1 have 10 columns, row 2 has 12 (extra pinky
-flanking), row 3 has 6 (thumbs). The flanking pinkies (positions 20 and 31) are
-wired on electrical row 3, `RC(3,0)` and `RC(3,9)`. Hold-tap defaults live in
-the `&mt {};` block, custom behaviors in `/behaviors {};`.
+Matrix: 38 keys (rows 0-1: 10 cols, row 2: 12 with outer pinkies, row 3: 6 thumbs).
+Outer pinkies (positions 20, 31) are wired on electrical row 3 (`RC(3,0)`, `RC(3,9)`).
+Hold-tap defaults live in `&mt {};` and `&lt {};`, custom behaviors in `/behaviors {};`.
 
 ## Structure
 
-```
-config/                     # ZMK user configuration
-  totem.keymap              # Root keymap — THIS IS THE SOURCE OF TRUTH
-  totem.conf                # Board-level config (sleep, idle, BT)
-  west.yml                  # West manifest (ZMK revision, pinned to a main commit)
-  info.json                 # Layout metadata (keymap-drawer TOTEM geometry, row/col = transform)
-  boards/shields/totem/     # Shield definitions (dtsi, overlay, Kconfig)
-    totem_left.overlay      # Left half column GPIOs
-    totem_right.overlay     # Right half (col-offset=5) + column GPIOs
-    totem.dtsi              # Matrix transform (10 cols, 4 rows) + kscan definition
-```
+- `config/totem.keymap`: root keymap (source of truth)
+- `config/totem.conf`: board-level config (sleep, idle, BT)
+- `config/west.yml`: west manifest (ZMK revision, pinned to a main commit)
+- `config/info.json`: layout metadata (keymap-drawer TOTEM geometry)
+- `config/boards/shields/totem/`: shield definitions (`totem_left.overlay`, `totem_right.overlay`, `totem.dtsi`)
 
 ## Layers
 
-Layer table, thumb bindings and combos: `docs/totem/keymap.md` (the only
-hand-written copy; it is published by the docs site). Update it in the same
-commit as any layer, thumb or combo change to `config/totem.keymap`. Do not
-repeat the table here.
+Layer table, thumb bindings and combos live in `docs/totem/keymap.md` (published by CI).
+Update it in the same commit as any layer, thumb or combo change to `config/totem.keymap`.
+Do not repeat the table here.
 
 ## Custom Behaviors
 
-### Hold-taps
+- **Hold-taps**: stock `&mt` (150ms) on BASE pos 19, NAV and SYM home rows; stock `&lt` (150ms) on outer pinkies (`&lt FUN CAPSLOCK`, pos 20, 31), left middle thumb (`&lt 1 BACKSPACE`, pos 33), and right middle thumb (`&lt 2 ESCAPE`, pos 36).
+- **Mod-morphs (6)**: `comma_semicolon`, `period_colon`, `cmd_tab` (TAB -> F21 with GUI), `cmd_stb` (LS(TAB) -> F22 with GUI), `bwd_dwd`, `caps` (caps_word -> CAPSLOCK with shift).
+- **Combos (3)**: `enter` (16 17), `bs_df` (12 13), `caps_word` (32 37, outer thumbs), BASE only. See `docs/totem/keymap.md#combos`.
 
-The layers bind the stock `&mt` (tapping-term 150ms, set in the `&mt {};` block) and
-stock `&lt` (tapping-term 150ms, set in the `&lt {};` block) on the home rows of BASE
-(position 19), NAV and SYM, the outer pinkies (hold FUN, tap Caps Lock) and the left
-middle thumb (hold NAV, tap Backspace).
-
-### Mod-morphs (6)
-
-`comma_semicolon`, `period_colon`, `cmd_tab` (TAB→F21 with GUI), `cmd_stb` (LS(TAB)→F22 with GUI), `bwd_dwd`, `caps` (caps_word→CAPSLOCK with shift).
-
-### Combos (3)
-
-`enter` (16 17), `bs_df` (12 13), `caps_word` (32 37, outer thumbs), all BASE only. See
-`docs/totem/keymap.md#combos`.
-
-## Validate
+## Commands
 
 ```sh
-python3 -m venv /tmp/kv && /tmp/kv/bin/pip install keymap-drawer
-/tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
-/tmp/kv/bin/keymap draw /tmp/keymap.yaml -o /tmp/keymap.svg
+make validate     # parse config/totem.keymap with keymap-drawer
+make              # build build/{totem_left,totem_right,settings_reset}.uf2
+make totem_left   # build one shield
+make update       # re-sync config, fetch ZMK at west.yml revision
+make clean        # remove build/ and ~/.cache/zmk-totem/build
 ```
 
-## Build (needs ZMK SDK)
+Isolated west workspace lives at `~/.cache/zmk-totem` with Zephyr SDK 0.17.0 at `~/zephyr-sdk-0.17.0`. First-time setup: README "Build".
+CI builds firmware (`.github/workflows/zmk-build.yml`) and renders the SVG + HonKit site (`.github/workflows/zmk-docs.yml`).
 
-```sh
-make              # build/{totem_left,totem_right,settings_reset}.uf2
-make totem_left   # one shield
-make update       # re-sync config, fetch ZMK at the pinned west.yml revision
-```
-
-The Makefile builds in an isolated west workspace at `~/.cache/zmk-totem` (as CI does) with the
-Zephyr SDK 0.17.0 at `~/zephyr-sdk-0.17.0`. Setup: README "Build".
-
-CI builds via `.github/workflows/zmk-build.yml`. Parse without errors means the
-keymap is valid.
-
-## Docs preview
-
-```sh
-npm install honkit
-npx honkit serve docs     # http://localhost:4000
-```
-
-Docs deploy on push to `main` touching `docs/**` or `book.json`
-(`.github/workflows/zmk-docs.yml`). The keymap SVG is generated in CI by
-keymap-drawer. To regenerate it locally into the docs tree:
-
-```sh
-/tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
-/tmp/kv/bin/keymap draw /tmp/keymap.yaml -o docs/totem/images/keymap.svg
-```
-
-## Layout counterparts
+## Layout Counterparts
 
 Apply layout changes here and in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd`
 and `JakobMelchard/apple/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
-or explain any copies left behind. No release-please or changelog bumps.
+or note any copies left behind. No release-please or changelog bumps.

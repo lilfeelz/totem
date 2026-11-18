@@ -1,32 +1,17 @@
 ---
 name: keymap-validation
-description: Validate ZMK keymap with keymap-drawer. Parse .keymap → YAML, draw SVG, check for errors.
+description: Validate ZMK keymap with keymap-drawer using make validate or parse/draw.
 ---
 
 # Keymap Validation
 
 ```sh
-python3 -m venv /tmp/kv
-/tmp/kv/bin/pip install keymap-drawer
-/tmp/kv/bin/keymap parse -z config/totem.keymap -c keymap_drawer.config.yaml -o /tmp/keymap.yaml
-/tmp/kv/bin/keymap draw /tmp/keymap.yaml -c keymap_drawer.config.yaml -o docs/totem/images/keymap.svg
+make validate
+# or with keymap-drawer installed locally:
+keymap -c keymap_drawer.config.yaml parse -z config/totem.keymap -o /tmp/keymap.yaml
+keymap -c keymap_drawer.config.yaml draw /tmp/keymap.yaml -o docs/totem/images/keymap.svg
 ```
 
-No output = valid. Any error = fix the keymap.
-
-Common errors:
-- Missing `#binding-cells` on custom behaviors
-- Wrong number of bindings in a row (must match matrix column count)
-- Referencing undefined combos or behaviors
-- Nested `()` in key positions (use separate lines)
-
-## Keymap Config
-
-`keymap_drawer.config.yaml` maps ZMK keycodes to display labels:
-- Raw codes → Unicode symbols (e.g., `LEFT_SHIFT` → "⇧")
-- Modifier formatting (e.g., `&kp LS(EXCL)` → "!")
-- Raw binding labels (e.g., `&caps_word` → "⇪")
-
-## CI
-
-Docs workflow (`.github/workflows/zmk-docs.yml` at the repo root) auto-generates SVG and deploys to GH Pages.
+Exit 0 means valid. Global `-c keymap_drawer.config.yaml` must precede `parse`/`draw`.
+Common errors: missing `#binding-cells`, wrong binding count per row, undefined combos/behaviors, nested `()` in key positions.
+`.github/workflows/zmk-docs.yml` runs the same commands on deploy.
