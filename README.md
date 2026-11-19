@@ -114,16 +114,12 @@ config/                      # ZMK user configuration
 ./
 ├── build.yaml                # Build matrix
 ├── docs/                     # Honkit documentation site
-├── keymap_drawer.config.yaml # SVG rendering config
-└── .agents/                  # Agent rules for this repo
+└── keymap_drawer.config.yaml # SVG rendering config
 ```
 
 ## Known Issues
 
 - BT_SEL profile switch can hang; to read the USB log, flash the UF2 from the `totem_left_debug-xiao_ble__zmk-zmk` artifact of the latest [zmk-build](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml) run
 
-Layout counterparts live in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd` and
-[JakobMelchard/apple](https://github.com/JakobMelchard/apple/tree/main/kanata-ios) `kanata-ios/`.
-Keep layer, thumb, hold and chord changes in step across all three layouts.
-
-Firmware history was extracted from `lilfeelz/keyboard`, since deleted; kanata-ios lives in `JakobMelchard/apple`.
+The same layout is mirrored in a kanata configuration for macOS; keep layer, thumb, hold
+and chord changes in step across both.
