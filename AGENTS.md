@@ -87,6 +87,5 @@ keymap-drawer. To regenerate it locally into the docs tree:
 
 ## Layout counterparts
 
-Apply layout changes here and in `lilfeelz/.config/home/dot_config/kanata/kanata.kbd`
-and `JakobMelchard/apple/kanata-ios/TotemKit/Sources/TotemCore/default.kbd`,
-or explain any copies left behind. No release-please or changelog bumps.
+The same layout is mirrored in a kanata configuration for macOS. Apply layout changes in
+both places, or explain any copy left behind. No release-please or changelog bumps.
