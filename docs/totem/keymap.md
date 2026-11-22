@@ -70,14 +70,3 @@ Cells marked "(held)" or inherited from BASE are `&trans` in the keymap.
 | `enter` | 16 17 | J K | BASE | Enter |
 | `bs_df` | 12 13 | D F | BASE | `&bwd_dwd`: Alt+Backspace, with Shift Alt+Delete |
 | `caps_word` | 32 37 | L outer thumb, R outer thumb | BASE | `&caps`: caps word, with Shift held Caps Lock |
-
-## Macros
-
-None are defined. Seven that no key or combo used (`leq`, `geq`, `left_arrow`,
-`right_arrow`, `colon_equals`, `yank_inner_word`, `yank_line`) were removed from
-`config/totem.keymap`; they are in the git history if a key needs one again.
-
-## Stale keymap comment
-
-The ASCII diagram in the comment above `base` in `config/totem.keymap` is
-stale (QWERTZ letters, old thumb labels). Trust the `bindings`, not the comment.

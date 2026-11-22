@@ -1,6 +1,6 @@
 [![Build](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml/badge.svg)](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml)
-[![Docs](https://github.com/lilfeelz/totem/actions/workflows/zmk-docs.yml/badge.svg)](https://lilfeelz.github.io/totem/)
-[![GH Pages](https://img.shields.io/badge/docs-lilfeelz.github.io/totem-9ee7ff?logo=github&labelColor=0b0d10)](https://lilfeelz.github.io/totem/)
+[![Docs](https://github.com/lilfeelz/totem/actions/workflows/zmk-docs.yml/badge.svg)](https://docs.lilfeelz.org/totem/)
+[![GH Pages](https://img.shields.io/badge/docs-docs.lilfeelz.org/totem-9ee7ff?logo=github&labelColor=0b0d10)](https://docs.lilfeelz.org/totem/)
 
 # TOTEM ZMK Configuration
 
@@ -8,26 +8,13 @@
 
 ## Quickstart
 
-### Edit keymap
+Edit `config/totem.keymap` (root keymap overrides the shield built-in), then validate:
 
 ```sh
-# Edit root keymap (this overrides shield built-in)
-$EDITOR config/totem.keymap
+make validate
 ```
 
-### Validate
-
-```sh
-python3 -m venv /tmp/kv
-/tmp/kv/bin/pip install keymap-drawer
-/tmp/kv/bin/keymap parse -z config/totem.keymap -o /tmp/keymap.yaml
-/tmp/kv/bin/keymap draw /tmp/keymap.yaml -o /tmp/keymap.svg
-# No errors = valid
-```
-
-### Build
-
-CI builds on push. Locally, one-time setup:
+CI builds on push (`zmk-build.yml`) and publishes docs (`zmk-docs.yml`). Locally, one-time setup:
 
 ```sh
 brew install cmake ninja dtc gperf ccache
@@ -38,86 +25,40 @@ make update
 uv tool install west --force --with-requirements ~/.cache/zmk-totem/zephyr/scripts/requirements-base.txt
 ```
 
-Then `make` writes `build/{totem_left,totem_right,settings_reset}.uf2`; `make totem_left` builds one.
-The workspace lives in `~/.cache/zmk-totem`, outside the repo, because this repo is itself a Zephyr module.
+### Build
+
+`make` writes `build/{totem_left,totem_right,settings_reset}.uf2`; `make totem_left` builds one shield, `make clean` clears build outputs. The west workspace lives in `~/.cache/zmk-totem` outside the repo because this repo is itself a Zephyr module.
 
 ### Docs preview
 
 ```sh
 npm install honkit
-npx honkit serve docs
-# opens http://localhost:4000
+npx honkit serve docs  # http://localhost:4000
 ```
 
 ## Layout
 
-### Matrix (4 rows x 10 cols, 38 keys)
-
-Numbers are ZMK key positions, the flat indices used by `key-positions` and
-`hold-trigger-key-positions`. The transform lives in
-[`config/boards/shields/totem/totem.dtsi`](config/boards/shields/totem/totem.dtsi).
-
-```
-     ┌────┬────┬────┬────┬────┐   ┌────┬────┬────┬────┬────┐
-     │  0 │  1 │  2 │  3 │  4 │   │  5 │  6 │  7 │  8 │  9 │
-     ├────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┤
-     │ 10 │ 11 │ 12 │ 13 │ 14 │   │ 15 │ 16 │ 17 │ 18 │ 19 │
-┌────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼────┐
-│ 20 │ 21 │ 22 │ 23 │ 24 │ 25 │   │ 26 │ 27 │ 28 │ 29 │ 30 │ 31 │
-└────┴────┴────┼────┼────┼────┤   ├────┼────┼────┼────┴────┴────┘
-               │ 32 │ 33 │ 34 │   │ 35 │ 36 │ 37 │
-               └────┴────┴────┘   └────┴────┴────┘
-```
-
-Rows 0-2 hold 10, 10 and 12 positions; row 3 holds 6 thumbs. The two outer
-pinkies (20 and 31) are wired on electrical row 3, not row 2, which is why the
-transform map reads `RC(3,0)` and `RC(3,9)` there. Each half is a 4x5 matrix
-with 19 of its 20 positions used.
-
-### Layers and thumb keys
-
-Four layers (BASE, NAV, SYM, FUN). The layer table, thumb bindings and combos live in one place:
-[`docs/totem/keymap.md`](docs/totem/keymap.md) (published at
-[lilfeelz.github.io/totem](https://lilfeelz.github.io/totem/totem/keymap.html)).
-
-## Key Features
-
-- **Hold-taps**: stock `&mt` (150ms) on the home rows: `/` on BASE (hold Ctrl+Alt+Cmd), Cmd+A/S/D/F on NAV and `` ` `` `"` `'` `~` on SYM, each holding Cmd, Ctrl, Alt or Globe; stock `&lt` on the outer pinkies (hold FUN, tap Caps Lock) and on the left middle thumb (hold NAV, tap Backspace). Caps word is a combo on the two outer thumbs (32, 37).
-- **Caps word**: `&caps_word` with continuation list (underscore, backspace, delete, arrows, etc.)
-- **3 combos**: see [`docs/totem/keymap.md`](docs/totem/keymap.md#combos)
-- **6 mod-morphs**: comma↔semicolon, period↔colon, cmd+tab↔F21, cmd+shift+tab↔F22, alt+backspace↔alt+delete, caps-word↔caps-lock
-- **Sticky keys**: one-shot shift on the outer thumb keys
+Four layers (BASE, NAV, SYM, FUN). Matrix positions, layer tables, thumb bindings and combos live in [`docs/totem/keymap.md`](docs/totem/keymap.md) and at [docs.lilfeelz.org/totem](https://docs.lilfeelz.org/totem/).
 
 ## Build Targets
 
 | Shield | Board |
-|--------|-------|
+|---|---|
 | `totem_left` | `xiao_ble//zmk` |
 | `totem_right` | `xiao_ble//zmk` |
 | `settings_reset` | `xiao_ble//zmk` |
 
-## CI/CD
-
-Workflows live at the repo root (`.github/workflows/`):
-
-- **zmk-build.yml**: Builds firmware on push/PR touching `config/**`, `build.yaml` or `zephyr/**`
-- **zmk-docs.yml**: Generates keymap SVG + honkit docs site, deploys to GH Pages
-
 ## Structure
 
-```
-config/                      # ZMK user configuration
-├── totem.keymap              # Root keymap (primary, overrides shield)
-├── totem.conf                # Board config (sleep, BT, idle)
-├── west.yml                  # West manifest (ZMK pinned to a main commit)
-└── boards/shields/totem/     # Shield definition (dtsi, overlay, Kconfig)
-./
-├── build.yaml                # Build matrix
-├── docs/                     # Honkit documentation site
-└── keymap_drawer.config.yaml # SVG rendering config
-```
+- `config/totem.keymap`: root keymap (source of truth)
+- `config/totem.conf`: board config (sleep, BT, idle)
+- `config/west.yml`: west manifest (ZMK pinned to a main commit)
+- `config/boards/shields/totem/`: shield definition (dtsi, overlay, Kconfig)
+- `build.yaml`: CI build matrix
+- `docs/`: HonKit documentation site
+- `keymap_drawer.config.yaml`: SVG rendering config
 
-## Known Issues
+## Layout Counterparts
 
 - BT_SEL profile switch can hang; to read the USB log, flash the UF2 from the `totem_left_debug-xiao_ble__zmk-zmk` artifact of the latest [zmk-build](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml) run
 

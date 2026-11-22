@@ -3,20 +3,18 @@
 ## Local Build
 
 ```sh
-west build -b xiao_ble//zmk -d build/left  -s zmk/app -- -DSHIELD=totem_left
-west build -b xiao_ble//zmk -d build/right -s zmk/app -- -DSHIELD=totem_right
+make              # writes build/{totem_left,totem_right,settings_reset}.uf2
+make totem_left   # build one shield
 ```
+
+First-time ZMK SDK setup is in `README.md`.
 
 ## GitHub Actions
 
-CI runs the ZMK build steps in an isolated west workspace. Push to `main` to trigger a build. Firmware artifacts available under [Actions](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml).
+CI builds in an isolated west workspace on push to `main`. Firmware artifacts live under [Actions](https://github.com/lilfeelz/totem/actions/workflows/zmk-build.yml).
 
 ## Flashing
 
 1. Enter bootloader (double-tap reset on XIAO BLE)
 2. Copy the `.uf2` file to the mounted mass-storage device
-3. Device resets automatically
-
-### First flash
-
-Left half must be flashed first. Label controllers before soldering.
+3. Device resets automatically; flash left half first and label controllers before soldering
