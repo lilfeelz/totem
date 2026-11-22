@@ -7,8 +7,8 @@ repos:
     rev: v8.30.1
     hooks:
       - id: gitleaks
-  - repo: https://github.com/JakobMelchard/.githooks
-    rev: v1.0.2
+  - repo: https://github.com/JakobMelchard/.github
+    rev: hooks-v2.2.0
     hooks:
       - id: conventional-commit
   # Workflow lint, with shellcheck over every run: block.
