@@ -70,3 +70,5 @@ Cells marked "(held)" or inherited from BASE are `&trans` in the keymap.
 | `enter` | 16 17 | J K | BASE | Enter |
 | `bs_df` | 12 13 | D F | BASE | `&bwd_dwd`: Alt+Backspace, with Shift Alt+Delete |
 | `caps_word` | 32 37 | L outer thumb, R outer thumb | BASE | `&caps`: caps word, with Shift held Caps Lock |
+| `cmd_shift_nav` | 12 13 | D F | NAV | `&cmd_shift`: holds Cmd+Shift while held |
+| `cmd_shift_sym` | 16 17 | J K | SYM | `&cmd_shift`: holds Cmd+Shift while held |
