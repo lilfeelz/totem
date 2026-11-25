@@ -49,9 +49,28 @@
             key-positions = <32 37>;
             layers = <0>;
         };
+
+        cmd_shift_nav {
+            bindings = <&cmd_shift>;
+            key-positions = <12 13>;
+            layers = <1>;
+        };
+
+        cmd_shift_sym {
+            bindings = <&cmd_shift>;
+            key-positions = <16 17>;
+            layers = <2>;
+        };
     };
 
     behaviors {
+        cmd_shift: cmd_shift {
+            compatible = "zmk,behavior-macro";
+            label = "CMD_SHIFT";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LSHIFT &kp LGUI>, <&macro_pause_for_release>, <&macro_release &kp LSHIFT &kp LGUI>;
+        };
+
         comma_semicolon: comma_semicolon {
             compatible = "zmk,behavior-mod-morph";
             label = "COMMA_SEMICOLON";

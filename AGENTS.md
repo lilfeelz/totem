@@ -25,7 +25,8 @@ Do not repeat the table here.
 
 - **Hold-taps**: stock `&mt` (150ms) on BASE pos 19, NAV and SYM home rows; stock `&lt` (150ms) on outer pinkies (`&lt FUN CAPSLOCK`, pos 20, 31), left middle thumb (`&lt 1 BACKSPACE`, pos 33), and right middle thumb (`&lt 2 ESCAPE`, pos 36).
 - **Mod-morphs (6)**: `comma_semicolon`, `period_colon`, `cmd_tab` (TAB -> F21 with GUI), `cmd_stb` (LS(TAB) -> F22 with GUI), `bwd_dwd`, `caps` (caps_word -> CAPSLOCK with shift).
-- **Combos (3)**: `enter` (16 17), `bs_df` (12 13), `caps_word` (32 37, outer thumbs), BASE only. See `docs/totem/keymap.md#combos`.
+- **Combos (5)**: `enter` (16 17), `bs_df` (12 13), `caps_word` (32 37, outer thumbs) on BASE; `cmd_shift_nav` (12 13, NAV) and `cmd_shift_sym` (16 17, SYM) hold Cmd+Shift. See `docs/totem/keymap.md#combos`.
+- **Macro**: `cmd_shift` presses LSHIFT+LGUI until release, the pair's Cmd+Shift.
 
 ## Commands
 
